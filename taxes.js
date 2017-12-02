@@ -222,8 +222,8 @@ const printSavings = (taxableIncome) => {
   const fullResults = {};
   _.each(brackets, (plan, planName) => {
     _.each(plan, (status, statusName) => {
-      const name = `${planName} ${statusName}`; 
-      fullResults[name] = taxes(status); 
+      const name = `${planName} ${statusName}`;
+      fullResults[name] = taxes(status);
       console.log(`    ${name}`);
       console.log(`        tax is ${formatCurrency(fullResults[name].tax)}`);
       console.log(`       rate is ${formatPercent(fullResults[name].effective_rate)}`);
@@ -257,112 +257,4 @@ const printSavings = (taxableIncome) => {
   console.log('');
 };
 
-printSavings(10000);
-printSavings(20000);
-printSavings(30000);
-printSavings(40000);
 printSavings(50000);
-printSavings(60000);
-printSavings(70000);
-printSavings(80000);
-printSavings(90000);
-
-printSavings(100000);
-printSavings(120000);
-printSavings(130000);
-printSavings(140000);
-printSavings(150000);
-printSavings(160000);
-printSavings(170000);
-printSavings(180000);
-printSavings(190000);
-
-printSavings(200000);
-printSavings(220000);
-printSavings(230000);
-printSavings(240000);
-printSavings(250000);
-printSavings(260000);
-printSavings(270000);
-printSavings(280000);
-printSavings(290000);
-
-printSavings(300000);
-printSavings(320000);
-printSavings(330000);
-printSavings(340000);
-printSavings(350000);
-printSavings(360000);
-printSavings(370000);
-printSavings(380000);
-printSavings(390000);
-
-printSavings(400000);
-printSavings(420000);
-printSavings(430000);
-printSavings(440000);
-printSavings(450000);
-printSavings(460000);
-printSavings(470000);
-printSavings(480000);
-printSavings(490000);
-
-printSavings(500000);
-printSavings(520000);
-printSavings(530000);
-printSavings(540000);
-printSavings(550000);
-printSavings(560000);
-printSavings(570000);
-printSavings(580000);
-printSavings(590000);
-
-printSavings(600000);
-printSavings(620000);
-printSavings(630000);
-printSavings(640000);
-printSavings(650000);
-printSavings(660000);
-printSavings(670000);
-printSavings(680000);
-printSavings(690000);
-
-printSavings(700000);
-printSavings(720000);
-printSavings(730000);
-printSavings(740000);
-printSavings(750000);
-printSavings(760000);
-printSavings(770000);
-printSavings(780000);
-printSavings(790000);
-
-printSavings(800000);
-printSavings(820000);
-printSavings(830000);
-printSavings(840000);
-printSavings(850000);
-printSavings(860000);
-printSavings(870000);
-printSavings(880000);
-printSavings(890000);
-
-printSavings(900000);
-printSavings(920000);
-printSavings(930000);
-printSavings(940000);
-printSavings(950000);
-printSavings(960000);
-printSavings(970000);
-printSavings(980000);
-printSavings(990000);
-
-printSavings(1000000);
-printSavings(1020000);
-printSavings(1030000);
-printSavings(1040000);
-printSavings(1050000);
-printSavings(1060000);
-printSavings(1070000);
-printSavings(1080000);
-printSavings(1090000);
