@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import autobind from 'autobind-decorator';
-import { numbersOnly, formatCurrency } from '../../utils/string-utils';
 
 @autobind
 export default class Question extends Component {
@@ -17,17 +16,6 @@ export default class Question extends Component {
 
   onChange(event) {
     this.props.onChange(event.target.value);
-  }
-
-  get formattedAnswer() {
-    if (this.props.type === 'checkbox') {
-      return this.props.answer === 'yes';
-    }
-    if (this.props.type === 'currency') {
-      const numbers = numbersOnly(this.props.answer);
-      return formatCurrency(numbers);
-    }
-    return this.props.answer;
   }
 
   get inputType() {
@@ -47,7 +35,7 @@ export default class Question extends Component {
             name={this.props.name}
             type={this.inputType}
             placeholder={this.props.placeholder}
-            value={this.formattedAnswer}
+            value={this.props.answer}
             onChange={this.onChange}
             autoCorrect="off"
             autoCapitalize="none"
