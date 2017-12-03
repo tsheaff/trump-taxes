@@ -22,10 +22,11 @@ const taxes = (income, brackets) => {
       return false;
     }
   });
+  const effectiveRate = (income === 0) ? 0 : (taxSoFar / income);
 
   return {
     tax: taxSoFar,
-    effective_rate: (taxSoFar / income),
+    effective_rate: effectiveRate,
   };
 };
 

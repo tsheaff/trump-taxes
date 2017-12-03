@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import autobind from 'autobind-decorator';
+import { Form, Text, Radio, RadioGroup, Select } from 'react-form';
 
-import Question from './Question';
-import { formatCurrency, formatPercent } from '../../utils/string-utils';
+import stateOptions from '../../models/brackets/state/states';
+import { formatCurrency, formatPercent, numbersOnly } from '../../utils/string-utils';
 import taxCalculator from '../../models/brackets/calculator';
 
 @autobind
@@ -11,49 +12,15 @@ export default class Homepage extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      marriageStatus: false,
-      income: 50000,
-    };
-  }
-
-  onChangeMarriageStatus(marriageStatus) {
-    this.setState({
-      marriageStatus: marriageStatus,
-    });
-  }
-
-  onChangeIncome(income) {
-    this.setState({
-      income: income,
-    });
+    this.state = {};
   }
 
   taxResults() {
-    const isMarried = !!this.state.marriageStatus;
-    return taxCalculator(this.state.income, isMarried);
-  }
-
-  get questions() {
-    return (
-      <div className={classNames('questions')}>
-        <Question
-          name="marriage-status"
-          question="Are you married?"
-          answer={this.state.marriageStatus}
-          type="checkbox"
-          onChange={this.onChangeMarriageStatus}
-        />
-        <Question
-          name="income"
-          placeholder={formatCurrency(50000)}
-          question="How much will you make in 2017?"
-          answer={this.state.income}
-          type="currency"
-          onChange={this.onChangeIncome}
-        />
-      </div>
-    );
+    const values = this.state.formValues || {};
+    const isMarried = values.filingStatus === 'married';
+    const rawIncome = values.income || '0';
+    const income = parseInt(numbersOnly(rawIncome), 10);
+    return taxCalculator(income, isMarried);
   }
 
   result(type, title) {
@@ -80,10 +47,43 @@ export default class Homepage extends Component {
     );
   }
 
+  get form() {
+    return (
+      <Form formDidUpdate={this.formDidUpdate}>
+        { (formApi) => (
+          <form onSubmit={formApi.submitForm} id="form2">
+            <label htmlFor="income">How much will you make in 2018?</label>
+            <Text field="income" id="income" />
+            <label htmlFor="filingStatus">How will you file?</label>
+            <RadioGroup field="filingStatus">
+              { (group) => (
+                <div>
+                  <label htmlFor="single" className="single">Single</label>
+                  <Radio group={group} value="single" id="single" className="group-value single" />
+                  <label htmlFor="married" className="married">Married</label>
+                  <Radio group={group} value="married" id="married" className="group-value married" />
+                </div>
+              )}
+            </RadioGroup>
+            <label htmlFor="status" className="d-block">Which state do you live in?</label>
+            <Select field="status" id="status" options={stateOptions} />
+          </form>
+        )}
+      </Form>
+    );
+  }
+
+  formDidUpdate(formState = {}) {
+    console.log('formDidUpdate', formState);
+    this.setState({
+      formValues: formState.values,
+    });
+  }
+
   render() {
     return (
       <div className="homepage">
-        {this.questions}
+        {this.form}
         {this.results}
       </div>
     );
