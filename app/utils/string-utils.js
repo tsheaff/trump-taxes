@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 export function commafy(num) {
   const str = num.toString().split('.');
   if (str[0].length >= 4) {
@@ -16,7 +18,8 @@ export function formatPercent(raw) {
 }
 
 export function formatCurrency(raw) {
-  const isNegative = raw < 0;
+  const number = _.isNumber(raw) ? raw : parseInt(raw, 10);
+  const isNegative = number < 0;
   const totalCents = Math.floor(Math.abs(raw) * 100);
   const dollars = Math.floor(totalCents / 100);
   const centsLeft = totalCents - 100 * dollars;
@@ -27,4 +30,9 @@ export function formatCurrency(raw) {
     return centsLeft;
   })();
   return `${isNegative ? '-' : ''}$${formattedDollars}.${formattedCents}`;
+}
+
+export function numbersOnly(raw) {
+  const str = _.isString(raw) ? raw : `${raw}`;
+  return str.replace(/[^\d]/g, '');
 }
