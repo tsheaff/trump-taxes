@@ -6,6 +6,7 @@
   "scripts": {
     "prepush": "npm run lint",
     "start": "node build/server.js",
+    "start:dev": "npm run build && npm start",
     "start:debugger": "node --inspect --trace-warnings build/server.js",
     "build": "npm run build:server && npm run build:webpack:remote",
     "build:server": "babel server --out-dir build --ignore build/",
