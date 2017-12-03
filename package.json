@@ -14,7 +14,8 @@
     "watch": "babel server --out-dir build --stage 0 --watch",
     "lint": "npm run lint:js && npm run lint:less",
     "lint:js": "eslint . --ext .js --ext .jsx",
-    "lint:less": "lesshint app/styles"
+    "lint:less": "lesshint app/styles",
+    "postinstall": "npm run build"
   },
   "repository": {
     "type": "git",
