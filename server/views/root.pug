@@ -1,0 +1,22 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    title= pageTitle
+
+    block head-early
+
+    link(rel="icon" type="image/png" href="/images/favicon.png")
+
+    block head
+  body
+    block body-early
+
+    div
+      #react-root !{reactHTML}
+
+    - var scriptAttributes = {src: '/js/' + sourceName + '.js'};
+    script&attributes(scriptAttributes)
+
+    block body
