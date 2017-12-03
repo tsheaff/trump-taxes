@@ -1,0 +1,15 @@
+{
+  "presets": ["es2015", "react", "stage-0"],
+  "plugins": [
+    ["module-resolver", {
+      "alias": {
+        "components": "./app/components",
+        "styles": "./app/styles",
+        "_main": "./app/styles/_main",
+        "utils": "./app/utils",
+      },
+    }],
+    ["transform-runtime", { "polyfill": false, "regenerator": true }],
+    "transform-decorators-legacy",
+  ]
+}
